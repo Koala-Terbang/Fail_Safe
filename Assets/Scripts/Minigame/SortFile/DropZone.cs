@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class DropZone : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public string acceptedTag; // "GoodFile" or "BadFile"
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.CompareTag(acceptedTag))
+        {
+            // SortfileMinigame manager = FindObjectOfType<SortfileMinigame>();
+            // if (manager != null)
+            //     manager.FileSorted();
+            // other.gameObject.SetActive(false);
+            Destroy(other.gameObject, 0.05f);
+        }
+        else if (other.CompareTag("GoodFile") || other.CompareTag("BadFile"))
+        {
+            Debug.Log("Incorrect file dropped!");
+        }
     }
 }

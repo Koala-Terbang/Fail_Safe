@@ -1,36 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class DragFile : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DragFile : MonoBehaviour
 {
-    private RectTransform rectTransform;
-    private CanvasGroup canvasGroup;
-    private Vector2 originalPosition;
-
-    void Awake()
+    private Vector3 offset;
+    private bool dragging = false;
+    public SortfileMinigame manager;
+    // void Start()
+    // {
+    //     manager = FindObjectOfType<SortfileMinigame>();
+    // }
+    void OnMouseDown()
     {
-        rectTransform = GetComponent<RectTransform>();
-        canvasGroup = GetComponent<CanvasGroup>();
-        originalPosition = rectTransform.anchoredPosition;
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        offset = transform.position - new Vector3(mouseWorldPos.x, mouseWorldPos.y, transform.position.z);
+        dragging = true;
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    void OnMouseDrag()
     {
-        canvasGroup.blocksRaycasts = false;
+        if (dragging)
+        {
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = new Vector3(mouseWorldPos.x, mouseWorldPos.y, transform.position.z) + offset;
+        }
     }
 
-    public void OnDrag(PointerEventData eventData)
+    void OnMouseUp()
     {
-        rectTransform.anchoredPosition += eventData.delta;
+        dragging = false;
     }
 
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        canvasGroup.blocksRaycasts = true;
-
-        if (gameObject != null)
-            rectTransform.anchoredPosition = originalPosition;
-    }
+//     void OnDestroy()
+//     {
+//         if (manager != null)
+//             manager.FileSorted();
+//     }
 }

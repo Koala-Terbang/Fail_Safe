@@ -9,6 +9,7 @@ public class ServerZoom : MonoBehaviour
     public CinemachineVirtualCamera zoomCam;
     public GameObject serverUI;
     public GameObject button;
+    public GameObject Glitch;
 
     private bool isZoomed = false;
 
@@ -16,6 +17,8 @@ public class ServerZoom : MonoBehaviour
     {
         if (!isZoomed)
         {
+            if (!Glitch.activeSelf)
+                return;
             mainCam.Priority = 1;
             zoomCam.Priority = 5;
             isZoomed = true;

@@ -15,6 +15,13 @@ public class MinigameSelector : MonoBehaviour
         int index = Random.Range(0, minigames.Length);
         currentMinigame = minigames[index];
         currentMinigame.SetActive(true);
+
+        if (currentMinigame.name.Contains("Popup"))
+        {
+            PopupManager popup = currentMinigame.GetComponent<PopupManager>();
+            if (popup != null)
+                popup.StartPopupGame();
+        }
     }
 
     public void EndMinigame()

@@ -9,6 +9,7 @@ public class MonitorZoom : MonoBehaviour
     public CinemachineVirtualCamera zoomCam;
     public GameObject pcScreen;
     public GameObject Button;
+    public GameObject Glitch;
 
     private bool isZoomed = false;
 
@@ -29,8 +30,13 @@ public class MonitorZoom : MonoBehaviour
         mainCam.Priority = 1;
         zoomCam.Priority = 5;
         isZoomed = true;
-        ShowPC();
         Button.SetActive(false);
+        pcScreen.SetActive(true);
+        if (Glitch.activeSelf)
+        {
+            return;
+        }
+        StartMinigame();
     }
 
     void ZoomOut()
@@ -41,12 +47,10 @@ public class MonitorZoom : MonoBehaviour
         pcScreen.SetActive(false);
         Invoke(nameof(ShowButton), 2f);
     }
-    void ShowPC()
+    void StartMinigame()
     {
-        pcScreen.SetActive(true);
-        PopupManager popup = pcScreen.GetComponentInChildren<PopupManager>();
-        if (popup != null)
-            popup.StartPopupGame();
+        MinigameSelector selector = pcScreen.GetComponent<MinigameSelector>();
+        selector.StartRandomMinigame();
     }
 
     void ShowButton()
