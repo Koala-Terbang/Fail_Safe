@@ -9,7 +9,7 @@ public class SortfileMinigame : MonoBehaviour
     public RectTransform spawnArea;
     private int remainingFiles;
 
-    void Start()
+    void OnEnable()
     {
         SpawnFiles();
     }
@@ -22,11 +22,9 @@ public class SortfileMinigame : MonoBehaviour
             int index = Random.Range(0, filePrefabs.Length);
             GameObject file = Instantiate(filePrefabs[index], spawnArea);
 
-            RectTransform fileRT = file.GetComponent<RectTransform>();
+            RectTransform fileRT = file.AddComponent<RectTransform>();
 
-            fileRT = file.AddComponent<RectTransform>();
-
-            fileRT.localScale = Vector3.one;
+            fileRT.localScale = Vector3.one * 1.5f;
 
             float width = spawnArea.rect.width;
             float height = spawnArea.rect.height;
@@ -38,20 +36,14 @@ public class SortfileMinigame : MonoBehaviour
         }
     }
 
-    // public void FileSorted()
-    // {
-    //     remainingFiles--;
+    public void FileSorted()
+    {
+        remainingFiles--;
 
-    //     if (remainingFiles <= 0)
-    //     {
-    //         Debug.Log("All files sorted!");
-
-    //         MinigameSelector selector = FindObjectOfType<MinigameSelector>();
-    //         if (selector != null)
-    //             selector.StartRandomMinigame();
-
-    //         gameObject.SetActive(false);
-    //     }
-    // }
-
+        if (remainingFiles <= 0)
+        {
+            FindObjectOfType<ObjectiveManager>().CompleteObjective(0);
+            gameObject.SetActive(false);
+        }
+    }
 }

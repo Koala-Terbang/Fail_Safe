@@ -10,7 +10,10 @@ public class PopupManager : MonoBehaviour
     public int popupCount = 10;
     private int remainingPopups;
     public GameObject Glitch;
-
+    void OnEnable()
+    {
+        StartPopupGame();
+    }
     public void StartPopupGame()
     {
         ClearPopups();
