@@ -9,10 +9,17 @@ public class PopupManager : MonoBehaviour
     public RectTransform popupArea;
     public int popupCount = 10;
     private int remainingPopups;
-    public GameObject Glitch;
-    void OnEnable()
+    void Start()
     {
         StartPopupGame();
+    }
+
+    void Update()
+    {
+        if (remainingPopups <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
     public void StartPopupGame()
     {
@@ -42,8 +49,6 @@ public class PopupManager : MonoBehaviour
             {
                 Destroy(popup);
                 remainingPopups--;
-                if (remainingPopups <= 0)
-                    BreakPC();
             });
         }
     }
@@ -52,10 +57,5 @@ public class PopupManager : MonoBehaviour
     {
         foreach (Transform child in popupArea)
             Destroy(child.gameObject);
-    }
-
-    void BreakPC()
-    {
-        Glitch.SetActive(true);
     }
 }
