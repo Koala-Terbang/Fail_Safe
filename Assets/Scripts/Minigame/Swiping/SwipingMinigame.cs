@@ -9,17 +9,16 @@ public class SwipingMinigame : MonoBehaviour
     [System.Serializable]
     public class WebsiteCard
     {
-        public string title;
+        public string publish;
         public string desc;
         public Sprite image;
-        public bool isSafe; // true = right swipe is correct
+        public bool isSafe;
     }
-    public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
+    public TextMeshProUGUI publishText;
     public Image siteImage;
     public Button leftButton;
     public Button rightButton;
-
 
     public WebsiteCard[] cards;
     private int currentIndex = 0;
@@ -45,14 +44,9 @@ public class SwipingMinigame : MonoBehaviour
         }
 
         WebsiteCard card = cards[currentIndex];
-        titleText.text = card.title;
-
         descriptionText.text = card.desc;
-
-        if (siteImage != null && card.image != null)
-            siteImage.sprite = card.image;
-        else if (siteImage != null)
-            siteImage.enabled = false;
+        publishText.text = card.publish;
+        siteImage.sprite = card.image;
     }
 
     void OnSwipe(bool swipedRight)

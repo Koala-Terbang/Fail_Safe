@@ -2517,7 +2517,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &530391176
 Transform:
   m_ObjectHideFlags: 0
@@ -5136,6 +5136,7 @@ MonoBehaviour:
   characterImage: {fileID: 2130078896}
   nameText: {fileID: 551122616}
   dialogueText: {fileID: 1561892895}
+  PCZoom: {fileID: 530391175}
 --- !u!224 &1232194314
 RectTransform:
   m_ObjectHideFlags: 0

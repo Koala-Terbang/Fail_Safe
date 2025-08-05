@@ -19,6 +19,7 @@ public class DialogueSystem : MonoBehaviour
     public Image characterImage;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
+    public GameObject PCZoom;
 
     private int currentIndex = 0;
 
@@ -54,7 +55,7 @@ public class DialogueSystem : MonoBehaviour
 
     void EndDialogue()
     {
-        Debug.Log("Dialogue complete!");
         gameObject.SetActive(false);
+        PCZoom.SetActive(true);
     }
 }
