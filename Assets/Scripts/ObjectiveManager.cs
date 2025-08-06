@@ -2,35 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEditor.SearchService;
-using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class ObjectiveManager : MonoBehaviour
 {
-    [Header("UI References")]
     public TextMeshProUGUI[] objectiveTexts;
-    public string[] objectives = new string[]
-    {
-        "Sort out the files (File App)",
-        "Select reliable passwords (Password App)",
-        "Read the news feed (News App)",
-        "Connect the correlating wires (Network App)"
-    };
-
+    public string[] objectives;
     private bool[] completed;
+    private int completedCount;
+    public string nextScene;
 
     void Start()
     {
         completed = new bool[objectives.Length];
+        completedCount = objectives.Length;
 
         for (int i = 0; i < objectiveTexts.Length && i < objectives.Length; i++)
         {
             objectiveTexts[i].text = $"Objective {i + 1}: {objectives[i]}";
         }
     }
+    void Update()
+    {
+        if (completedCount <= 0)
+        {
+            SceneManager.LoadScene(nextScene);
+        }
+    }
 
     public void CompleteObjective(int index)
     {
+        completedCount--;
         if (index >= 0 && index < objectiveTexts.Length && !completed[index])
         {
             completed[index] = true;

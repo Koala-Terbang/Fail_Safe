@@ -6,10 +6,7 @@ using UnityEngine.UI;
 
 public class PasswordMinigame : MonoBehaviour
 {
-    [Header("Button References")]
-    public Button[] passwordButtons; // Just drag your 4 buttons here
-
-    [Header("Settings")]
+    public Button[] passwordButtons;
     public int correctRoundsRequired = 5;
 
     private int correctRounds = 0;
@@ -56,7 +53,6 @@ public class PasswordMinigame : MonoBehaviour
         correctRounds++;
         if (correctRounds >= correctRoundsRequired)
         {
-            Debug.Log("Password minigame complete!");
             FindObjectOfType<ObjectiveManager>()?.CompleteObjective(1);
             gameObject.SetActive(false);
         }
@@ -68,7 +64,6 @@ public class PasswordMinigame : MonoBehaviour
 
     void OnWrongChoice()
     {
-        Debug.Log("Wrong password. Try again.");
         SetupNewRound();
     }
 }

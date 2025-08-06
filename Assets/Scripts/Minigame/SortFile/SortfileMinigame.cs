@@ -24,7 +24,7 @@ public class SortfileMinigame : MonoBehaviour
 
             RectTransform fileRT = file.AddComponent<RectTransform>();
 
-            fileRT.localScale = Vector3.one * 1.5f;
+            fileRT.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 
             float width = spawnArea.rect.width;
             float height = spawnArea.rect.height;

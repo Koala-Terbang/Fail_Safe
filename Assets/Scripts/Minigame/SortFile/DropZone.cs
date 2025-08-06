@@ -15,9 +15,5 @@ public class DropZone : MonoBehaviour
             other.gameObject.SetActive(false);
             Destroy(other.gameObject, 0.05f);
         }
-        else if (other.CompareTag("GoodFile") || other.CompareTag("BadFile"))
-        {
-            Debug.Log("Incorrect file dropped!");
-        }
     }
 }
