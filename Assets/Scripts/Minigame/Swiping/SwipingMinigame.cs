@@ -19,6 +19,7 @@ public class SwipingMinigame : MonoBehaviour
     public Image siteImage;
     public Button leftButton;
     public Button rightButton;
+    public Button desktopButton;
 
     public WebsiteCard[] cards;
     private int currentIndex = 0;
@@ -37,7 +38,10 @@ public class SwipingMinigame : MonoBehaviour
         if (currentIndex >= cards.Length)
         {
             if (correctAnswers >= neededCorrect)
+            {
+                desktopButton.interactable = false;
                 FindObjectOfType<ObjectiveManager>()?.CompleteObjective(2);
+            }
 
             gameObject.SetActive(false);
             return;

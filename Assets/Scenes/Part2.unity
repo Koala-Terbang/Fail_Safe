@@ -3476,6 +3476,7 @@ MonoBehaviour:
   codeLines:
   - printf("Hello World");
   - Kontol
+  button: {fileID: 1289431952}
 --- !u!1 &773453699
 GameObject:
   m_ObjectHideFlags: 0
@@ -4535,6 +4536,7 @@ MonoBehaviour:
   insectCount: 5
   VirusAlive: 5
   panel: {fileID: 482266554}
+  button: {fileID: 1138173772}
 --- !u!1 &1041625968
 GameObject:
   m_ObjectHideFlags: 0

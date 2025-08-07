@@ -3264,6 +3264,7 @@ MonoBehaviour:
   - {fileID: 104802603}
   - {fileID: 857736312}
   correctRoundsRequired: 5
+  button: {fileID: 914022950}
 --- !u!114 &833393382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4521,6 +4522,7 @@ MonoBehaviour:
   siteImage: {fileID: 83208280}
   leftButton: {fileID: 802300889}
   rightButton: {fileID: 161069579}
+  desktopButton: {fileID: 2007821463}
   cards:
   - publish: 'Publisher: BuzzTrap Online'
     desc: 'Description: Politician caught moonlighting as influencer?!'
@@ -6286,6 +6288,7 @@ MonoBehaviour:
   - {fileID: 1395778728762155515, guid: 47d84fbce37846844aeb0840b819ea22, type: 3}
   fileCount: 10
   spawnArea: {fileID: 570488200}
+  button: {fileID: 1104775772}
 --- !u!114 &1559114277
 MonoBehaviour:
   m_ObjectHideFlags: 0

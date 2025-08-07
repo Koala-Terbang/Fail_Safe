@@ -8,6 +8,7 @@ public class PasswordMinigame : MonoBehaviour
 {
     public Button[] passwordButtons;
     public int correctRoundsRequired = 5;
+    public Button button;
 
     private int correctRounds = 0;
     private int correctIndex;
@@ -54,6 +55,7 @@ public class PasswordMinigame : MonoBehaviour
         if (correctRounds >= correctRoundsRequired)
         {
             FindObjectOfType<ObjectiveManager>()?.CompleteObjective(1);
+            button.interactable = false;
             gameObject.SetActive(false);
         }
         else

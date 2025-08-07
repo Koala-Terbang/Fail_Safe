@@ -14,6 +14,7 @@ public class CodingMinigame : MonoBehaviour
     private int currentIndex = 0;
     private int correctCount = 0;
     private int totalwords;
+    public Button button;
 
     void Start()
     {
@@ -44,6 +45,7 @@ public class CodingMinigame : MonoBehaviour
                 inputField.interactable = false;
                 gameObject.SetActive(false);
                 FindObjectOfType<ObjectiveManager>()?.CompleteObjective(1);
+                button.interactable = false;
                 return;
             }
 

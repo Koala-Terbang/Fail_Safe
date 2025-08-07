@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VirusMinigame : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class VirusMinigame : MonoBehaviour
     private float spawnInterval = 0.5f;
     public int VirusAlive = 5;
     public GameObject panel;
+    public Button button;
 
     void Start()
     {
@@ -26,6 +28,7 @@ public class VirusMinigame : MonoBehaviour
         {
             panel.SetActive(false);
             FindObjectOfType<ObjectiveManager>()?.CompleteObjective(0);
+            button.interactable = false;
         }
     }
     IEnumerator SpawnVirusOverTime()

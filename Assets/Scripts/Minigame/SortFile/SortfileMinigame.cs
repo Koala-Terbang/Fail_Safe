@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SortfileMinigame : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class SortfileMinigame : MonoBehaviour
     public int fileCount = 10;
     public RectTransform spawnArea;
     private int remainingFiles;
+    public Button button;
 
     void OnEnable()
     {
@@ -42,6 +44,7 @@ public class SortfileMinigame : MonoBehaviour
 
         if (remainingFiles <= 0)
         {
+            button.interactable = false;
             FindObjectOfType<ObjectiveManager>().CompleteObjective(0);
             gameObject.SetActive(false);
         }
