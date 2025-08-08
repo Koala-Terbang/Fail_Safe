@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DialogueSystem : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class DialogueSystem : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
     public GameObject PCZoom;
+    public string nextScene;
 
     private int currentIndex = 0;
 
@@ -47,15 +49,29 @@ public class DialogueSystem : MonoBehaviour
         dialogueText.text = line.text;
 
         if (line.characterSprite != null)
+        {
             characterImage.sprite = line.characterSprite;
+            characterImage.gameObject.SetActive(true);
+        }
+        else
+        {
+            characterImage.gameObject.SetActive(false);
+        }
 
-        if (line.backgroundSprite != null)
-            backgroundImage.sprite = line.backgroundSprite;
+        backgroundImage.sprite = line.backgroundSprite;
     }
 
     void EndDialogue()
     {
         gameObject.SetActive(false);
         PCZoom.SetActive(true);
+        if (nextScene != null)
+        {
+            SceneManager.LoadScene(nextScene);
+        }
+        else
+        {
+            PCZoom.SetActive(true);
+        }
     }
 }

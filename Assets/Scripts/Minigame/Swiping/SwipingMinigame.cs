@@ -27,10 +27,12 @@ public class SwipingMinigame : MonoBehaviour
     public WebsiteCard[] cards;
     private int currentIndex = 0;
     private int correctAnswers = 0;
-    public int neededCorrect = 5;
+    private int neededCorrect;
+    public GameObject tryAgain;
 
     void Start()
     {
+        neededCorrect = cards.Length;
         leftButton.onClick.AddListener(() => OnSwipe(false));
         rightButton.onClick.AddListener(() => OnSwipe(true));
         ShowCurrentCard();
@@ -45,7 +47,8 @@ public class SwipingMinigame : MonoBehaviour
                 desktopButton.interactable = false;
                 FindObjectOfType<ObjectiveManager>()?.CompleteObjective(2);
             }
-
+            currentIndex = 0;
+            correctAnswers = 0;
             gameObject.SetActive(false);
             return;
         }
@@ -65,12 +68,21 @@ public class SwipingMinigame : MonoBehaviour
         if (isCorrect)
         {
             correctAnswers++;
+            currentIndex++;
         }
         else
         {
+            StartCoroutine(TryAgainScreen());
         }
-
-        currentIndex++;
         ShowCurrentCard();
+    }
+    IEnumerator TryAgainScreen()
+    {
+        tryAgain.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        tryAgain.SetActive(false);
+
     }
 }
