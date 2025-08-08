@@ -10,7 +10,7 @@ public class ObjectiveManager : MonoBehaviour
     public string[] objectives;
     private bool[] completed;
     private int completedCount;
-    public string nextScene;
+    public GameObject nextDialog;
 
     void Start()
     {
@@ -26,7 +26,7 @@ public class ObjectiveManager : MonoBehaviour
     {
         if (completedCount <= 0)
         {
-            SceneManager.LoadScene(nextScene);
+            nextDialog.SetActive(true);
         }
     }
 

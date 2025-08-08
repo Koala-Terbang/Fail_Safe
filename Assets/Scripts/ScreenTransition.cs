@@ -7,7 +7,7 @@ public class ScreenTransition : MonoBehaviour
     public GameObject[] frames;
     public float[] frameDurations;
 
-    void Start()
+    void OnEnable()
     {
         StartCoroutine(PlaySequence());
     }

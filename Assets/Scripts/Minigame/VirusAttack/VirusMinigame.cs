@@ -41,16 +41,30 @@ public class VirusMinigame : MonoBehaviour
     }
 
     void SpawnRandomInsect()
-    {
-        Vector2 spawnPos = new Vector2(
-            Random.Range(spawnBounds.min.x, spawnBounds.max.x),
-            Random.Range(spawnBounds.min.y, spawnBounds.max.y)
-        );
+{
+    float minDistance = 2f;
+    float maxDistance = 5f;
 
-        int index = Random.Range(0, insectPrefabs.Length);
-        GameObject virus = Instantiate(insectPrefabs[index], spawnPos, Quaternion.identity);
-        Virus ai = virus.GetComponent<Virus>();
-        ai.SetTarget(target);
-        ai.SetSpawner(this);
+    Vector2 spawnPos;
+    int safety = 0;
+
+    do
+    {
+        float angle = Random.Range(0f, Mathf.PI * 2);
+        float distance = Random.Range(minDistance, maxDistance);
+        Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+        spawnPos = (Vector2)target.position + direction * distance;
+
+        safety++;
+        if (safety > 100)
+            break;
     }
+    while (!spawnBounds.Contains(spawnPos));
+
+    int index = Random.Range(0, insectPrefabs.Length);
+    GameObject virus = Instantiate(insectPrefabs[index], spawnPos, Quaternion.identity);
+    Virus ai = virus.GetComponent<Virus>();
+    ai.SetTarget(target);
+    ai.SetSpawner(this);
+}
 }

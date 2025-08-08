@@ -16,22 +16,18 @@ public class PasswordLevel
 
 public class PasswordMinigame : MonoBehaviour
 {
-    [Header("Text UI")]
     public TMP_Text taskText;
     public TMP_Text deptText;
     public TMP_Text userText;
 
-    [Header("Password Buttons")]
     public Button[] passwordButtons;
 
-    [Header("Button to Disable After Completion")]
     public Button button;
 
-    [Header("Level Settings")]
     public List<PasswordLevel> levels = new List<PasswordLevel>();
+    public GameObject tryAgain;
     private int currentLevel = 0;
 
-    
     private float typeSpeed = 0.03f;
 
     void Start()
@@ -93,7 +89,11 @@ public class PasswordMinigame : MonoBehaviour
         btn.onClick.RemoveAllListeners();
         btn.onClick.AddListener(() =>
         {
-            if (isCorrect) OnCorrectChoice();
+            if (isCorrect)
+            {
+                OnCorrectChoice();
+
+            }
             else OnWrongChoice();
         });
         btn.interactable = true;
@@ -114,6 +114,7 @@ public class PasswordMinigame : MonoBehaviour
 
     void OnWrongChoice()
     {
+        StartCoroutine(TryAgainScreen());
         StartCoroutine(ShowIntroThenPasswords());
     }
 
@@ -125,5 +126,14 @@ public class PasswordMinigame : MonoBehaviour
             target.text += text[i];
             yield return new WaitForSeconds(typeSpeed);
         }
+    }
+    IEnumerator TryAgainScreen()
+    {
+        tryAgain.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        tryAgain.SetActive(false);
+
     }
 }
