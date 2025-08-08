@@ -4,68 +4,126 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class PasswordLevel
+{
+    public string Task;
+    public string Dept;
+    public string User;
+    public string[] options = new string[4];
+    public int correctIndex;
+}
+
 public class PasswordMinigame : MonoBehaviour
 {
+    [Header("Text UI")]
+    public TMP_Text taskText;
+    public TMP_Text deptText;
+    public TMP_Text userText;
+
+    [Header("Password Buttons")]
     public Button[] passwordButtons;
-    public int correctRoundsRequired = 5;
+
+    [Header("Button to Disable After Completion")]
     public Button button;
 
-    private int correctRounds = 0;
-    private int correctIndex;
+    [Header("Level Settings")]
+    public List<PasswordLevel> levels = new List<PasswordLevel>();
+    private int currentLevel = 0;
 
-    private string[] weakPasswords = { "studyhard", "Freedom21", "Luna1234", "hello123", "qwerty", "sunshine" };
-    private string[] strongPasswords = { "W1nDy!Sn0w_84dF0x", "Gh0$7P@ssw0rd!", "R3dM00n#Sky98", "S@feH0use_99!" };
+    
+    private float typeSpeed = 0.03f;
 
     void Start()
     {
+        StartCoroutine(ShowIntroThenPasswords());
+    }
+    IEnumerator ShowIntroThenPasswords()
+    {
+        taskText.text = "";
+        deptText.text = "";
+        userText.text = "";
+
+        foreach (var btn in passwordButtons)
+        {
+            btn.GetComponentInChildren<TMP_Text>().text = "";
+            btn.interactable = false;
+        }
+
+        PasswordLevel level = levels[currentLevel];
+
+        yield return Typewriter(taskText, level.Task);
+        yield return new WaitForSeconds(0.3f);
+
+        yield return Typewriter(deptText, level.Dept);
+        yield return new WaitForSeconds(0.3f);
+
+        yield return Typewriter(userText, level.User);
+        yield return new WaitForSeconds(0.5f);
+
         SetupNewRound();
     }
 
     void SetupNewRound()
     {
-        correctIndex = Random.Range(0, passwordButtons.Length);
+        PasswordLevel level = levels[currentLevel];
 
         for (int i = 0; i < passwordButtons.Length; i++)
         {
             Button btn = passwordButtons[i];
-            TextMeshProUGUI tmp = btn.GetComponentInChildren<TextMeshProUGUI>();
+            TMP_Text tmp = btn.GetComponentInChildren<TMP_Text>();
 
-            if (i == correctIndex)
-            {
-                string strong = strongPasswords[Random.Range(0, strongPasswords.Length)];
-                tmp.text = strong;
+            tmp.text = "";
+            btn.interactable = false;
 
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(() => OnCorrectChoice());
-            }
-            else
-            {
-                string weak = weakPasswords[Random.Range(0, weakPasswords.Length)];
-                tmp.text = weak;
-
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(() => OnWrongChoice());
-            }
+            StartCoroutine(RevealPassword(tmp, level.options[i], btn, i == level.correctIndex));
         }
+    }
+
+    IEnumerator RevealPassword(TMP_Text textField, string content, Button btn, bool isCorrect)
+    {
+        yield return new WaitForSeconds(0.3f);
+
+        for (int i = 0; i < content.Length; i++)
+        {
+            textField.text += content[i];
+            yield return new WaitForSeconds(typeSpeed);
+        }
+
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(() =>
+        {
+            if (isCorrect) OnCorrectChoice();
+            else OnWrongChoice();
+        });
+        btn.interactable = true;
     }
 
     void OnCorrectChoice()
     {
-        correctRounds++;
-        if (correctRounds >= correctRoundsRequired)
+        currentLevel++;
+        if (currentLevel >= levels.Count)
         {
             FindObjectOfType<ObjectiveManager>()?.CompleteObjective(1);
             button.interactable = false;
             gameObject.SetActive(false);
+            return;
         }
-        else
-        {
-            SetupNewRound();
-        }
+        StartCoroutine(ShowIntroThenPasswords());
     }
 
     void OnWrongChoice()
     {
-        SetupNewRound();
+        StartCoroutine(ShowIntroThenPasswords());
+    }
+
+    IEnumerator Typewriter(TMP_Text target, string text)
+    {
+        target.text = "";
+        for (int i = 0; i < text.Length; i++)
+        {
+            target.text += text[i];
+            yield return new WaitForSeconds(typeSpeed);
+        }
     }
 }
