@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class SwipingMinigame : MonoBehaviour
 {
     [System.Serializable]
     public class WebsiteCard
     {
+        public string title;
         public string publish;
         public string desc;
         public Sprite image;
         public bool isSafe;
     }
+    public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI publishText;
     public Image siteImage;
@@ -48,6 +51,7 @@ public class SwipingMinigame : MonoBehaviour
         }
 
         WebsiteCard card = cards[currentIndex];
+        titleText.text = card.title;
         descriptionText.text = card.desc;
         publishText.text = card.publish;
         siteImage.sprite = card.image;
