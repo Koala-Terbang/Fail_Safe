@@ -1005,7 +1005,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c9865850225d65647ad1c8178218bde2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2741,7 +2741,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c0d8ee6c720be3c49bff5340ccf1a68c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3951,7 +3951,7 @@ MonoBehaviour:
   answers:
   - char server[] = "active";
   - "void log(float temp) {\r"
-  - "printf(\"Server Temp: %.2f\\\\n\", temp);\r"
+  - "printf(\"Server Temp: %.2f\\n\", temp);\r"
   - "int main() {\r"
   - "float temperature = 67.5;\r"
   - return 0;
@@ -4408,11 +4408,11 @@ MonoBehaviour:
   - speakerName: Supervisor
     text: Looks like the server's back online. Nicely done.
     characterSprite: {fileID: 21300000, guid: 5f94ba13c3933f344aa5755a11093aa7, type: 3}
-    backgroundSprite: {fileID: 21300000, guid: 0d47d1d2377ad0a4aa4473b2016da404, type: 3}
+    backgroundSprite: {fileID: 21300000, guid: 13288d4a04857504b9fadbf1f70892c9, type: 3}
   - speakerName: Player
     text: Thanks. I cleared some junk data and minor bugs, it should hold for now.
     characterSprite: {fileID: 21300000, guid: 5f94ba13c3933f344aa5755a11093aa7, type: 3}
-    backgroundSprite: {fileID: 21300000, guid: 0d47d1d2377ad0a4aa4473b2016da404, type: 3}
+    backgroundSprite: {fileID: 21300000, guid: 13288d4a04857504b9fadbf1f70892c9, type: 3}
   - speakerName: Player
     text: Do we know what caused the issue in the first place?
     characterSprite: {fileID: 21300000, guid: 5f94ba13c3933f344aa5755a11093aa7, type: 3}
@@ -4432,18 +4432,18 @@ MonoBehaviour:
   - speakerName: Player
     text: "I\u2019ll keep checking the logs. Maybe I can spot a pattern."
     characterSprite: {fileID: 21300000, guid: 5f94ba13c3933f344aa5755a11093aa7, type: 3}
-    backgroundSprite: {fileID: 21300000, guid: 0d47d1d2377ad0a4aa4473b2016da404, type: 3}
+    backgroundSprite: {fileID: 21300000, guid: 13288d4a04857504b9fadbf1f70892c9, type: 3}
   - speakerName: Supervisor
     text: Good initiative. Tell me if you find anything strange. We can't afford
       to let small issues grow.
     characterSprite: {fileID: 21300000, guid: 5f94ba13c3933f344aa5755a11093aa7, type: 3}
-    backgroundSprite: {fileID: 21300000, guid: 0d47d1d2377ad0a4aa4473b2016da404, type: 3}
+    backgroundSprite: {fileID: 21300000, guid: 13288d4a04857504b9fadbf1f70892c9, type: 3}
   backgroundImage: {fileID: 257037383}
   characterImage: {fileID: 712929908}
   nameText: {fileID: 2034771768}
   dialogueText: {fileID: 1531923234}
   PCZoom: {fileID: 0}
-  nextScene: Part2
+  nextScene: Part3
 --- !u!1 &794254136
 GameObject:
   m_ObjectHideFlags: 0
@@ -6987,7 +6987,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: a11ef5881abfbab479ee602e49c9a2ba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
