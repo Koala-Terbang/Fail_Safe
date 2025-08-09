@@ -12,6 +12,8 @@ TagManager:
   - VideoFile
   - ImageFile
   - PdfFile
+  - VirusMinigame
+  - Virus
   layers:
   - Default
   - TransparentFX

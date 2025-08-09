@@ -5,12 +5,8 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager I;
-
-    [Header("Sources")]
     public AudioSource musicSource;
     public AudioSource sfxSource;
-
-    [Header("Mixer (optional)")]
     public AudioMixer mixer;
 
     void Awake()
@@ -22,7 +18,6 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic(AudioClip clip, float fade = 0.5f)
     {
-        if (clip == null) return;
         StopAllCoroutines();
         StartCoroutine(FadeInMusic(clip, fade));
     }
@@ -70,15 +65,6 @@ public class AudioManager : MonoBehaviour
     {
         if (clip == null) return;
         sfxSource.PlayOneShot(clip, volume);
-    }
-
-    public void PlaySFXVaried(AudioClip clip, float volume = 1f, float pitchJitter = 0.08f)
-    {
-        if (clip == null) return;
-        float oldPitch = sfxSource.pitch;
-        sfxSource.pitch = 1f + Random.Range(-pitchJitter, pitchJitter);
-        sfxSource.PlayOneShot(clip, volume);
-        sfxSource.pitch = oldPitch;
     }
 
     public void SetMusicVolume(float sliderValue)

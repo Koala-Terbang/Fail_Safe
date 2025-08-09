@@ -6,6 +6,7 @@ public class Cable : MonoBehaviour
 {
     public string cableColor;
     public GameObject stretchCable;
+    public AudioClip connectedSFX;
 
     void OnMouseDown()
     {
@@ -16,7 +17,7 @@ public class Cable : MonoBehaviour
     public void Connect()
     {
         gameObject.SetActive(false);
-
+        AudioManager.I.PlaySFX(connectedSFX);
         stretchCable.SetActive(true);
     }
 }

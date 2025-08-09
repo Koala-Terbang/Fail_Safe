@@ -5,6 +5,7 @@ using UnityEngine;
 public class Notifications : MonoBehaviour
 {
     public GameObject Notif;
+    public float durations = 1f;
     public void PopNotif()
     {
         StartCoroutine(PopupNotif());
@@ -12,7 +13,7 @@ public class Notifications : MonoBehaviour
     IEnumerator PopupNotif()
     {
         Notif.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(durations);
         Notif.SetActive(false);
     }
 }

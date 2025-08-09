@@ -28,6 +28,8 @@ public class SwipingMinigame : MonoBehaviour
     private int currentIndex = 0;
     private int correctAnswers = 0;
     private int neededCorrect;
+    public AudioClip swipeRightSFX;
+    public AudioClip swipeLeftSFX;
 
     void Start()
     {
@@ -75,5 +77,12 @@ public class SwipingMinigame : MonoBehaviour
             FindObjectOfType<TryAgain>().tryAgain();
         }
         ShowCurrentCard();
+    }
+    void PlaySwipeSFX(bool swipedRight)
+    {
+        if (swipedRight)
+            AudioManager.I.PlaySFX(swipeRightSFX);
+        else
+            AudioManager.I.PlaySFX(swipeLeftSFX);
     }
 }

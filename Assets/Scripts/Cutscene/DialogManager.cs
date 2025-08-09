@@ -14,6 +14,7 @@ public class DialogueSystem : MonoBehaviour
         [TextArea] public string text;
         public Sprite characterSprite;
         public Sprite backgroundSprite;
+        public AudioClip audioClip;
     }
     public DialogueLine[] lines;
     public Image backgroundImage;
@@ -36,17 +37,22 @@ public class DialogueSystem : MonoBehaviour
         {
             currentIndex++;
             if (currentIndex < lines.Length)
-                ShowLine(currentIndex);
+                StartCoroutine(ShowLine(currentIndex));
             else
                 EndDialogue();
         }
     }
 
-    void ShowLine(int index)
+    IEnumerator ShowLine(int index)
     {
         DialogueLine line = lines[index];
         nameText.text = line.speakerName;
         dialogueText.text = line.text;
+
+        if (line.audioClip != null)
+            AudioManager.I?.PlaySFX(line.audioClip);
+
+        yield return new WaitForSeconds(0.5f);
 
         if (line.characterSprite != null)
         {
@@ -72,6 +78,6 @@ public class DialogueSystem : MonoBehaviour
         else
         {
             SceneManager.LoadScene(nextScene);
-        }   
+        }
     }
 }

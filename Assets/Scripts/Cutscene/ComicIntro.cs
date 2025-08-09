@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class ComicIntro : MonoBehaviour
 {
     public GameObject[] slides;
     public GameObject Dialog;
+    public string nextScene;
     private int index = 0;
 
     void Start()
@@ -25,7 +27,14 @@ public class ComicIntro : MonoBehaviour
             else
             {
                 gameObject.SetActive(false);
-                Dialog.SetActive(true);
+                if (nextScene == "null")
+                {
+                    Dialog.SetActive(true);
+                }
+                else
+                {
+                    SceneManager.LoadScene(nextScene);
+                }
             }
         }
     }
