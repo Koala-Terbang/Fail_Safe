@@ -11,6 +11,9 @@ public class IPAddress : MonoBehaviour
     public Image indicator;
 
     private Button btn;
+    public Sprite selectedButton;
+    public Sprite doneButton;
+
 
     private void Awake()
     {
@@ -31,16 +34,16 @@ public class IPAddress : MonoBehaviour
     public void DisableButton()
     {
         btn.interactable = false;
-        indicator.color = Color.gray; // or dim it
+        indicator.sprite = doneButton;
     }
 
     public void Highlight()
     {
-        indicator.color = Color.white; // selected
+        indicator.sprite = selectedButton;
     }
 
     public void Unhighlight()
     {
-        indicator.color = Color.gray; // not selected
+        indicator.sprite = doneButton;
     }
 }

@@ -27,9 +27,10 @@ public class IPManager : MonoBehaviour
     public Button rejectButton;
     public TMP_Text clearedText;
     public Button button;
-
+    
     private int cleared = 0;
-    private int totalIPs = 6;
+    public int totalIPs = 5;
+    public GameObject endDialog;
 
     private void Awake() => Instance = this;
 
@@ -72,10 +73,11 @@ public class IPManager : MonoBehaviour
         if (selectedIP.ipData.isSafe)
         {
             FinishIP();
+            FindObjectOfType<Notifications>().PopNotif();
         }
         else
         {
-            Debug.Log("Incorrect");
+            FindObjectOfType<TryAgain>().tryAgain();
         }
     }
 
@@ -86,10 +88,11 @@ public class IPManager : MonoBehaviour
         if (!selectedIP.ipData.isSafe)
         {
             FinishIP();
+            FindObjectOfType<Notifications>().PopNotif();
         }
         else
         {
-            Debug.Log("Incorrect");
+            FindObjectOfType<TryAgain>().tryAgain();
         }
 
         
@@ -102,10 +105,11 @@ public class IPManager : MonoBehaviour
         SetButtonsInteractable(false);
         cleared++;
         UpdateClearedText();
+        Debug.Log(cleared);
 
         if (cleared >= totalIPs)
         {
-            FindObjectOfType<ObjectiveManager>()?.CompleteObjective(1);
+            endDialog.SetActive(true);
             button.interactable = false;
             gameObject.SetActive(false);
         }

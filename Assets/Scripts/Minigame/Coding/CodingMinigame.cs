@@ -5,57 +5,58 @@ using UnityEngine.UI;
 using TMPro;
 public class CodingMinigame : MonoBehaviour
 {
-    public TMP_Text targetText;
     public TMP_InputField inputField;
-    public TMP_Text feedbackText;
 
-    public string[] codeLines;
-
-    private int currentIndex = 0;
-    private int correctCount = 0;
-    private int totalwords;
+    [TextArea] public string[] answers;
+    public GameObject[] panels;
     public Button button;
+
+    int index = 0;
 
     void Start()
     {
-        totalwords = codeLines.Length;
-        ShowNewLine();
-        inputField.onSubmit.AddListener(CheckAnswer);
+        for (int i = 0; i < panels.Length; i++)
+            panels[i].SetActive(i == 0);
+
+        inputField.lineType = TMP_InputField.LineType.SingleLine;
+        inputField.onEndEdit.RemoveAllListeners();
+        inputField.onEndEdit.AddListener(OnSubmit);
+
+        ResetField();
     }
 
-    void ShowNewLine()
+    void OnSubmit(string text)
     {
-        inputField.text = "";
-        inputField.ActivateInputField();
-        targetText.text = codeLines[currentIndex];
-        feedbackText.text = "";
-    }
-
-    void CheckAnswer(string input)
-    {
-        if (input.Trim() == codeLines[currentIndex])
+        if (text.Trim() == answers[index].Trim())
         {
-            correctCount++;
-            feedbackText.text = "Correct!";
-            currentIndex = (currentIndex + 1) % codeLines.Length;
+            panels[index].SetActive(false);
+            index++;
 
-            if (correctCount >= totalwords)
+            if (index >= answers.Length)
             {
-                feedbackText.text = "All lines completed!";
                 inputField.interactable = false;
+                button.interactable = false;
                 gameObject.SetActive(false);
                 FindObjectOfType<ObjectiveManager>()?.CompleteObjective(1);
-                button.interactable = false;
+                FindObjectOfType<Notifications>().PopNotif();
                 return;
             }
 
-            Invoke(nameof(ShowNewLine), 1f);
+            panels[index].SetActive(true);
+            ResetField();
         }
         else
         {
-            feedbackText.text = "Try again";
-            inputField.text = "";
-            inputField.ActivateInputField();
+            FindObjectOfType<TryAgain>().tryAgain();
+            ResetField();
         }
+    }
+
+    void ResetField()
+    {
+        inputField.text = "";
+        inputField.Select();
+        inputField.ActivateInputField();
+        inputField.caretPosition = 0;
     }
 }
