@@ -10,6 +10,7 @@ public class SingleCutscene : MonoBehaviour
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             nextDialog.SetActive(true);
+            gameObject.SetActive(false);
         }
     }
 }

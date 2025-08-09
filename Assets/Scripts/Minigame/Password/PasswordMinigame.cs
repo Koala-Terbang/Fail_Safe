@@ -25,7 +25,6 @@ public class PasswordMinigame : MonoBehaviour
     public Button button;
 
     public List<PasswordLevel> levels = new List<PasswordLevel>();
-    public GameObject tryAgain;
     private int currentLevel = 0;
 
     private float typeSpeed = 0.03f;
@@ -107,6 +106,7 @@ public class PasswordMinigame : MonoBehaviour
             FindObjectOfType<ObjectiveManager>()?.CompleteObjective(1);
             button.interactable = false;
             gameObject.SetActive(false);
+            FindObjectOfType<Notifications>().PopNotif();
             return;
         }
         StartCoroutine(ShowIntroThenPasswords());
@@ -114,7 +114,7 @@ public class PasswordMinigame : MonoBehaviour
 
     void OnWrongChoice()
     {
-        StartCoroutine(TryAgainScreen());
+        FindObjectOfType<TryAgain>().tryAgain();
         StartCoroutine(ShowIntroThenPasswords());
     }
 
@@ -126,14 +126,5 @@ public class PasswordMinigame : MonoBehaviour
             target.text += text[i];
             yield return new WaitForSeconds(typeSpeed);
         }
-    }
-    IEnumerator TryAgainScreen()
-    {
-        tryAgain.SetActive(true);
-
-        yield return new WaitForSeconds(1f);
-
-        tryAgain.SetActive(false);
-
     }
 }

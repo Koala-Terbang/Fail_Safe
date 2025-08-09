@@ -64,14 +64,14 @@ public class DialogueSystem : MonoBehaviour
     void EndDialogue()
     {
         gameObject.SetActive(false);
-        PCZoom.SetActive(true);
-        if (nextScene != null)
-        {
-            SceneManager.LoadScene(nextScene);
-        }
-        else
+
+        if (nextScene == "null")
         {
             PCZoom.SetActive(true);
         }
+        else
+        {
+            SceneManager.LoadScene(nextScene);
+        }   
     }
 }

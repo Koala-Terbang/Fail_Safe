@@ -28,7 +28,6 @@ public class SwipingMinigame : MonoBehaviour
     private int currentIndex = 0;
     private int correctAnswers = 0;
     private int neededCorrect;
-    public GameObject tryAgain;
 
     void Start()
     {
@@ -46,10 +45,11 @@ public class SwipingMinigame : MonoBehaviour
             {
                 desktopButton.interactable = false;
                 FindObjectOfType<ObjectiveManager>()?.CompleteObjective(2);
+                FindObjectOfType<Notifications>().PopNotif();
+                gameObject.SetActive(false);
             }
             currentIndex = 0;
             correctAnswers = 0;
-            gameObject.SetActive(false);
             return;
         }
 
@@ -72,17 +72,8 @@ public class SwipingMinigame : MonoBehaviour
         }
         else
         {
-            StartCoroutine(TryAgainScreen());
+            FindObjectOfType<TryAgain>().tryAgain();
         }
         ShowCurrentCard();
-    }
-    IEnumerator TryAgainScreen()
-    {
-        tryAgain.SetActive(true);
-
-        yield return new WaitForSeconds(1f);
-
-        tryAgain.SetActive(false);
-
     }
 }

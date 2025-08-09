@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.TerrainUtils;
 
 public class ObjectiveManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class ObjectiveManager : MonoBehaviour
     private bool[] completed;
     private int completedCount;
     public GameObject nextDialog;
+    private bool isShown = false;
 
     void Start()
     {
@@ -24,8 +26,9 @@ public class ObjectiveManager : MonoBehaviour
     }
     void Update()
     {
-        if (completedCount <= 0)
+        if (completedCount <= 0 && !isShown)
         {
+            isShown = true;
             nextDialog.SetActive(true);
         }
     }

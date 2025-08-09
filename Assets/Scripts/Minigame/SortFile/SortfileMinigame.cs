@@ -47,6 +47,7 @@ public class SortfileMinigame : MonoBehaviour
             button.interactable = false;
             FindObjectOfType<ObjectiveManager>().CompleteObjective(0);
             gameObject.SetActive(false);
+            FindObjectOfType<Notifications>().PopNotif();
         }
     }
 }

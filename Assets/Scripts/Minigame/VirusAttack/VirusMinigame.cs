@@ -28,6 +28,7 @@ public class VirusMinigame : MonoBehaviour
         {
             panel.SetActive(false);
             FindObjectOfType<ObjectiveManager>()?.CompleteObjective(0);
+            FindObjectOfType<Notifications>().PopNotif();
             button.interactable = false;
         }
     }
