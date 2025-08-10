@@ -71,15 +71,15 @@ public class AudioManager : MonoBehaviour
     {
         v01 = Mathf.Clamp01(v01);
         if (mixer == null) { musicSource.volume = v01; return; }
-        const float MIN_DB = -40f;                 // floor
+        const float MIN_DB = -80f;
         mixer.SetFloat("MusicVol", Mathf.Lerp(MIN_DB, 0f, v01));
     }
-    
+
     public void SetSFXVolume(float v01)
     {
         v01 = Mathf.Clamp01(v01);
         if (mixer == null) { sfxSource.volume = v01; return; }
-        const float MIN_DB = -40f;
+        const float MIN_DB = -80f;
         mixer.SetFloat("SFXVol", Mathf.Lerp(MIN_DB, 0f, v01));
     }
 }

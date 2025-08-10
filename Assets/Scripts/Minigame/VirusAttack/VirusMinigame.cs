@@ -15,7 +15,7 @@ public class VirusMinigame : MonoBehaviour
     public Button button;
     public AudioClip deadSFX;
 
-    void Start()
+    void OnEnable()
     {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         spawnBounds = sr.bounds;
