@@ -67,15 +67,19 @@ public class AudioManager : MonoBehaviour
         sfxSource.PlayOneShot(clip, volume);
     }
 
-    public void SetMusicVolume(float sliderValue)
+    public void SetMusicVolume(float v01)
     {
-        if (mixer == null) { musicSource.volume = sliderValue; return; }
-        mixer.SetFloat("MusicVol", sliderValue > 0 ? Mathf.Log10(sliderValue) * 20f : -80f);
+        v01 = Mathf.Clamp01(v01);
+        if (mixer == null) { musicSource.volume = v01; return; }
+        const float MIN_DB = -40f;                 // floor
+        mixer.SetFloat("MusicVol", Mathf.Lerp(MIN_DB, 0f, v01));
     }
-
-    public void SetSFXVolume(float sliderValue)
+    
+    public void SetSFXVolume(float v01)
     {
-        if (mixer == null) { sfxSource.volume = sliderValue; return; }
-        mixer.SetFloat("SFXVol", sliderValue > 0 ? Mathf.Log10(sliderValue) * 20f : -80f);
+        v01 = Mathf.Clamp01(v01);
+        if (mixer == null) { sfxSource.volume = v01; return; }
+        const float MIN_DB = -40f;
+        mixer.SetFloat("SFXVol", Mathf.Lerp(MIN_DB, 0f, v01));
     }
 }
