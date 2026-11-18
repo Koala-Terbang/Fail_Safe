@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,17 +11,26 @@ public class SortfileMinigame : MonoBehaviour
     private int remainingFiles;
     public Button button;
 
+    public static Action OnFileSorted;
+    
     void OnEnable()
     {
+        OnFileSorted += FileSorted;
         SpawnFiles();
     }
+
+    void OnDisable()
+    {
+        OnFileSorted -= FileSorted;
+    }
+    
     void SpawnFiles()
     {
         remainingFiles = fileCount;
 
         for (int i = 0; i < fileCount; i++)
         {
-            int index = Random.Range(0, filePrefabs.Length);
+            int index = UnityEngine.Random.Range(0, filePrefabs.Length);
             GameObject file = Instantiate(filePrefabs[index], spawnArea);
 
             RectTransform fileRT = file.AddComponent<RectTransform>();
@@ -31,8 +40,8 @@ public class SortfileMinigame : MonoBehaviour
             float width = spawnArea.rect.width;
             float height = spawnArea.rect.height;
 
-            float x = Random.Range(-width / 2, width / 2);
-            float y = Random.Range(-height / 2, height / 2);
+            float x = UnityEngine.Random.Range(-width / 2, width / 2);
+            float y = UnityEngine.Random.Range(-height / 2, height / 2);
 
             fileRT.anchoredPosition = new Vector2(x, y);
         }
@@ -45,9 +54,8 @@ public class SortfileMinigame : MonoBehaviour
         if (remainingFiles <= 0)
         {
             button.interactable = false;
-            FindObjectOfType<ObjectiveManager>().CompleteObjective(0);
+            ObjectiveManager.OnCompleteObjective?.Invoke(0);
             gameObject.SetActive(false);
-            FindObjectOfType<Notifications>().PopNotif();
         }
     }
 }

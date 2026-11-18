@@ -7,6 +7,6 @@ public class PlayMusic : MonoBehaviour
     public AudioClip Music;
     void Start()
     {
-        AudioManager.I.PlayMusic(Music);
+        AudioManager.instance.PlayMusic(Music);
     }
 }

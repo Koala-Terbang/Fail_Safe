@@ -6,11 +6,7 @@ public class DragFile : MonoBehaviour
 {
     private Vector3 offset;
     private bool dragging = false;
-    public SortfileMinigame manager;
-    void Start()
-    {
-        manager = FindObjectOfType<SortfileMinigame>();
-    }
+    
     void OnMouseDown()
     {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

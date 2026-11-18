@@ -37,8 +37,7 @@ public class CodingMinigame : MonoBehaviour
                 inputField.interactable = false;
                 button.interactable = false;
                 gameObject.SetActive(false);
-                FindObjectOfType<ObjectiveManager>()?.CompleteObjective(1);
-                FindObjectOfType<Notifications>().PopNotif();
+                ObjectiveManager.OnCompleteObjective?.Invoke(1);
                 return;
             }
 
@@ -47,7 +46,7 @@ public class CodingMinigame : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<TryAgain>().tryAgain();
+            TryAgain.OnFailedMinigame?.Invoke();
             ResetField();
         }
     }

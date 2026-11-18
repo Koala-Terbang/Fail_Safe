@@ -9,7 +9,7 @@ public class ClickAudio : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            AudioManager.I.PlaySFX(clickSound);
+            AudioManager.instance.PlaySFX(clickSound);
         }
     }
 }

@@ -1,10 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class TryAgain : MonoBehaviour
 {
     public GameObject panel;
+    
+    public static Action OnFailedMinigame;
+
+    void Start()
+    {
+        OnFailedMinigame = tryAgain;
+    }
     public void tryAgain()
     {
         StartCoroutine(Try());

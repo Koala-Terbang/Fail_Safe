@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 
 public class HackerManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class HackerManager : MonoBehaviour
     private bool isDragging = false;
     public int totalHacker = 3;
     public GameObject IPpanel;
+
+    public static Action OnCurrentlyDraggingWire;
     void Awake() => Instance = this;
 
     public void StartDragTrace(PC target)
@@ -33,17 +36,25 @@ public class HackerManager : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
             
                 PC releasedOn = hit.collider.GetComponent<PC>();
-                if (releasedOn == tracedPC)
+                
+                if (releasedOn == null)
+                {
+                    return;
+                }
+                else if (releasedOn == tracedPC)
                 {
                     if (releasedOn.type == PCType.Hacker)
                     {
                         totalHacker--;
+                        OnCurrentlyDraggingWire?.Invoke();
                     }
                     else
-                        FindObjectOfType<TryAgain>().tryAgain();
+                        TryAgain.OnFailedMinigame?.Invoke();
                 }
-                tracedPC = null;
+                
                 isDragging = false;
+                tracedPC = null;
+                OnCurrentlyDraggingWire = null;
             }
     }
 }

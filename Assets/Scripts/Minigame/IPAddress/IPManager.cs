@@ -20,7 +20,7 @@ public class IPManager : MonoBehaviour
     public static IPManager Instance;
 
     private IPAddress selectedIP;
-
+    [SerializeField] Notifications notificationsScript;
     public TMP_Text ipDetailsText;
     public TMP_Text statusText;
     public Button acceptButton;
@@ -73,11 +73,11 @@ public class IPManager : MonoBehaviour
         if (selectedIP.ipData.isSafe)
         {
             FinishIP();
-            FindObjectOfType<Notifications>().PopNotif();
+            notificationsScript.PopNotif();
         }
         else
         {
-            FindObjectOfType<TryAgain>().tryAgain();
+            TryAgain.OnFailedMinigame?.Invoke();
         }
     }
 
@@ -88,11 +88,11 @@ public class IPManager : MonoBehaviour
         if (!selectedIP.ipData.isSafe)
         {
             FinishIP();
-            FindObjectOfType<Notifications>().PopNotif();
+            notificationsScript.PopNotif();
         }
         else
         {
-            FindObjectOfType<TryAgain>().tryAgain();
+            TryAgain.OnFailedMinigame?.Invoke();
         }
 
         

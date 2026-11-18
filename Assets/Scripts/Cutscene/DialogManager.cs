@@ -50,7 +50,7 @@ public class DialogueSystem : MonoBehaviour
         dialogueText.text = line.text;
 
         if (line.audioClip != null)
-            AudioManager.I?.PlaySFX(line.audioClip);
+            AudioManager.instance?.PlaySFX(line.audioClip);
 
         yield return new WaitForSeconds(0.5f);
 

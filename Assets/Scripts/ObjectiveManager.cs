@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -12,10 +12,15 @@ public class ObjectiveManager : MonoBehaviour
     private bool[] completed;
     private int completedCount;
     public GameObject nextDialog;
+    [SerializeField] private Notifications notifications;
     private bool isShown = false;
+    
+    public static Action <int> OnCompleteObjective;
 
     void Start()
     {
+        OnCompleteObjective = CompleteObjective;
+        
         completed = new bool[objectives.Length];
         completedCount = objectives.Length;
 
@@ -26,16 +31,19 @@ public class ObjectiveManager : MonoBehaviour
     }
     void Update()
     {
-        if (completedCount <= 0 && !isShown)
-        {
-            isShown = true;
-            nextDialog.SetActive(true);
-        }
     }
 
     public void CompleteObjective(int index)
     {
         completedCount--;
+        Debug.Log($"completed count: {completedCount}");
+        if (completedCount <= 0 && !isShown)
+        {
+            isShown = true;
+            nextDialog.SetActive(true);
+            return;
+        }
+        
         if (index >= 0 && index < objectiveTexts.Length && !completed[index])
         {
             completed[index] = true;
@@ -45,5 +53,6 @@ public class ObjectiveManager : MonoBehaviour
 
             objectiveTexts[index].text = $"<s>{rawText}</s>";
         }
+        notifications.PopNotif();
     }
 }

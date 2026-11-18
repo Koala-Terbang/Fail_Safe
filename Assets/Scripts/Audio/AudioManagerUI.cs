@@ -12,15 +12,15 @@ public class AudioManagerUI : MonoBehaviour
         musicSlider.value = PlayerPrefs.GetFloat("MusicVol01", 1f);
         sfxSlider.value = PlayerPrefs.GetFloat("SFXVol01", 1f);
 
-        AudioManager.I?.SetMusicVolume(musicSlider.value);
-        AudioManager.I?.SetSFXVolume(sfxSlider.value);
+        AudioManager.instance?.SetMusicVolume(musicSlider.value);
+        AudioManager.instance?.SetSFXVolume(sfxSlider.value);
 
         musicSlider.onValueChanged.AddListener(v => {
-            AudioManager.I?.SetMusicVolume(v);
+            AudioManager.instance?.SetMusicVolume(v);
             PlayerPrefs.SetFloat("MusicVol01", v);
         });
         sfxSlider.onValueChanged.AddListener(v => {
-            AudioManager.I?.SetSFXVolume(v);
+            AudioManager.instance?.SetSFXVolume(v);
             PlayerPrefs.SetFloat("SFXVol01", v);
         });
     }

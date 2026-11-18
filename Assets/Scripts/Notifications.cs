@@ -6,6 +6,7 @@ public class Notifications : MonoBehaviour
 {
     public GameObject Notif;
     public float durations = 1f;
+
     public void PopNotif()
     {
         StartCoroutine(PopupNotif());

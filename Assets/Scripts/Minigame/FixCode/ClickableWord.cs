@@ -25,7 +25,7 @@ public class ClickableWord : MonoBehaviour
             isWrongWord = false;
             text.text = text.text.Replace("<u><color=red>", "").Replace("</color></u>", "");
             gameObject.SetActive(false);
-            FindObjectOfType<WordChecker>().falsed--;
+            WordChecker.OnWordClicked?.Invoke();
         }
     }
-}
+} 

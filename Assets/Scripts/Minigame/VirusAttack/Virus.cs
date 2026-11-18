@@ -38,7 +38,7 @@ public class Virus : MonoBehaviour
 
     void HitTarget()
     {
-        FindObjectOfType<TryAgain>().tryAgain();
+        TryAgain.OnFailedMinigame?.Invoke();
         panel.SetActive(false);
         GameObject[] allViruses = GameObject.FindGameObjectsWithTag("Virus");
         foreach (GameObject virus in allViruses)

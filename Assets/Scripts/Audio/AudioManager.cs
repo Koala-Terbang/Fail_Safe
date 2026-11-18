@@ -4,15 +4,20 @@ using UnityEngine;
 using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager I;
+    public static AudioManager instance;
     public AudioSource musicSource;
     public AudioSource sfxSource;
     public AudioMixer mixer;
 
     void Awake()
     {
-        if (I != null && I != this) { Destroy(gameObject); return; }
-        I = this;
+        if (instance != null && instance != this) 
+        { 
+            Destroy(gameObject); 
+            return;
+        }
+        
+        instance = this;
         DontDestroyOnLoad(gameObject);
     }
 

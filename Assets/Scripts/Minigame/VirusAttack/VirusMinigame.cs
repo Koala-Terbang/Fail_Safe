@@ -28,8 +28,7 @@ public class VirusMinigame : MonoBehaviour
         if (VirusAlive == 0)
         {
             panel.SetActive(false);
-            FindObjectOfType<ObjectiveManager>()?.CompleteObjective(0);
-            FindObjectOfType<Notifications>().PopNotif();
+            ObjectiveManager.OnCompleteObjective?.Invoke(0);
             button.interactable = false;
         }
     }
@@ -71,6 +70,6 @@ public class VirusMinigame : MonoBehaviour
     }
     public void SFXKill()
     {
-        AudioManager.I.PlaySFX(deadSFX);
+        AudioManager.instance.PlaySFX(deadSFX);
     }
 }

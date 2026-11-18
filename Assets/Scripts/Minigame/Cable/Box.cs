@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Networking.PlayerConnection;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,11 +13,10 @@ public class Box : MonoBehaviour
         {
             SelectedCable.connected++;
             SelectedCable.selectedCableObject.Connect();
-            Debug.Log(SelectedCable.connected);
         }
         else
         {
-            FindObjectOfType<TryAgain>().tryAgain();
+            TryAgain.OnFailedMinigame?.Invoke();
         }
 
         SelectedCable.selectedCableColor = null;
@@ -29,10 +26,9 @@ public class Box : MonoBehaviour
     {
         if (SelectedCable.connected == 4)
         {
-            FindObjectOfType<ObjectiveManager>()?.CompleteObjective(3);
+            ObjectiveManager.OnCompleteObjective?.Invoke(3);
             button.interactable = false;
             panel.SetActive(false);
-            FindObjectOfType<Notifications>().PopNotif();
         }
     }
 }

@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
+using Unity.Cinemachine;
+
 
 public class CameraManager : MonoBehaviour
 {
-    public CinemachineVirtualCamera Cam1;
-    public CinemachineVirtualCamera Cam2;
+    public CinemachineCamera Cam1;
+    public CinemachineCamera Cam2;
 
     private bool isOnCam1 = true;
 

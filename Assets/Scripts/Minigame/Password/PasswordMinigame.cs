@@ -103,10 +103,9 @@ public class PasswordMinigame : MonoBehaviour
         currentLevel++;
         if (currentLevel >= levels.Count)
         {
-            FindObjectOfType<ObjectiveManager>()?.CompleteObjective(1);
+            ObjectiveManager.OnCompleteObjective?.Invoke(1);
             button.interactable = false;
             gameObject.SetActive(false);
-            FindObjectOfType<Notifications>().PopNotif();
             return;
         }
         StartCoroutine(ShowIntroThenPasswords());
@@ -114,7 +113,7 @@ public class PasswordMinigame : MonoBehaviour
 
     void OnWrongChoice()
     {
-        FindObjectOfType<TryAgain>().tryAgain();
+        TryAgain.OnFailedMinigame?.Invoke();
         StartCoroutine(ShowIntroThenPasswords());
     }
 

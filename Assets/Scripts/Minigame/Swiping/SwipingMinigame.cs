@@ -46,8 +46,7 @@ public class SwipingMinigame : MonoBehaviour
             if (correctAnswers >= neededCorrect)
             {
                 desktopButton.interactable = false;
-                FindObjectOfType<ObjectiveManager>()?.CompleteObjective(2);
-                FindObjectOfType<Notifications>().PopNotif();
+                ObjectiveManager.OnCompleteObjective?.Invoke(2);
                 gameObject.SetActive(false);
             }
             currentIndex = 0;
@@ -74,15 +73,15 @@ public class SwipingMinigame : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<TryAgain>().tryAgain();
+            TryAgain.OnFailedMinigame?.Invoke();
         }
         ShowCurrentCard();
     }
     void PlaySwipeSFX(bool swipedRight)
     {
         if (swipedRight)
-            AudioManager.I.PlaySFX(swipeRightSFX);
+            AudioManager.instance.PlaySFX(swipeRightSFX);
         else
-            AudioManager.I.PlaySFX(swipeLeftSFX);
+            AudioManager.instance.PlaySFX(swipeLeftSFX);
     }
 }

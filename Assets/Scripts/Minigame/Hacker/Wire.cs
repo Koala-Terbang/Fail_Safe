@@ -10,6 +10,12 @@ public class Wire : MonoBehaviour
     private void OnMouseDown()
     {
         HackerManager.Instance.StartDragTrace(connectedPC);
-        AudioManager.I.PlaySFX(cutWire);
+        AudioManager.instance.PlaySFX(cutWire);
+        HackerManager.OnCurrentlyDraggingWire += DeleteWire;
+    }
+
+    void DeleteWire()
+    {
+        Destroy(gameObject);
     }
 }

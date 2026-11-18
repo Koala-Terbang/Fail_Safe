@@ -10,8 +10,7 @@ public class DropZone : MonoBehaviour
     {
         if (other.CompareTag(acceptedTag))
         {
-            SortfileMinigame manager = FindObjectOfType<SortfileMinigame>();
-            manager.FileSorted();
+            SortfileMinigame.OnFileSorted?.Invoke();
             other.gameObject.SetActive(false);
             Destroy(other.gameObject, 0.05f);
         }

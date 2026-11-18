@@ -17,7 +17,7 @@ public class Cable : MonoBehaviour
     public void Connect()
     {
         gameObject.SetActive(false);
-        AudioManager.I.PlaySFX(connectedSFX);
+        AudioManager.instance.PlaySFX(connectedSFX);
         stretchCable.SetActive(true);
     }
 }
